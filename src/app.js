@@ -116,6 +116,16 @@ app.use('/api/v1/products', productRoutes)
 app.use('/api/v1/orders', orderRouter)
 app.use('/api/v1/analytics', analyticsRouter)
 
+// ─── Health Check ─────────────────────────────────────────────────
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'ok',
+        message: 'Apparel API is running',
+        environment: process.env.NODE_ENV,
+        timestamp: new Date().toISOString(),
+    });
+});
+
 // Catch unmatched routes
 app.use((req, res) => {
     res.status(404).json({
